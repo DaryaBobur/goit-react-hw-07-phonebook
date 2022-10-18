@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
 
+import { FcTwoSmartphones } from "react-icons/fc";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ console.log(data)
 
   return (
     <ContainerApp>
-      <Title>Phonebook</Title>
+      <Title><FcTwoSmartphones/>Phonebook</Title>
       <ContactForm />
 
       <Subtitle>Contacts</Subtitle>
