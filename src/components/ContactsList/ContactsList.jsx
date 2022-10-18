@@ -3,7 +3,8 @@ import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import { Contacts } from './ContactsListStyled';
 import { deleteContact } from '../../redux/operations'
-import { BsPhone, BsDot } from "react-icons/bs";
+import { BsFillTrashFill, BsDot } from "react-icons/bs";
+import { FcCellPhone, FcMinus, FcEmptyTrash} from "react-icons/fc";
 const ContactsList = ({ contacts }) => {
    const dispatch = useDispatch();
    console.log(contacts)
@@ -11,8 +12,8 @@ const ContactsList = ({ contacts }) => {
       <Contacts>
           {contacts.map(({ name, phone, id }) => ( 
          <li key={nanoid()}>
-               <p><BsPhone/> {name}<BsDot/>{phone}</p>
-               <button type='button' onClick={()=> dispatch(deleteContact(id))}>Delete</button>
+               <p><FcCellPhone/> {name}<FcMinus/>{phone}</p>
+               <button type='button' onClick={()=> dispatch(deleteContact(id))}><BsFillTrashFill/></button>
             </li>
             )
             )
