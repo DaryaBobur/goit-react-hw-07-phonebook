@@ -1,41 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit'
+// import { nanoid } from 'nanoid';
+import toast from 'react-hot-toast';
+import { fetchContacts, addContact, deleteContact } from './operations';
+const contactsInitialState = {
 
-import { nanoid } from 'nanoid';
-// const contactsInitialState = {
-//   contacts: [],
-// };
-
-// contacts: [
-//   items: [],
-//   isLoading: false,
-//   error: null
-// ],
-export const contactsSlice = createSlice({
-  name: 'contacts',
-  initialState: { contacts: {
     items: [],
       isLoading: false,
       error: null
-  } },
-  reducers: {
-    addContact: {
-      reducer(state, action) {
-        state.contacts.items.push(action.payload);
-      },
-      prepare(text) {
-        return {
-          payload: {
-            ...text,
-            id: nanoid(),
-          },
-        };
-      },
-    },
-    removeContact(state, action) {
-      const index = state.contacts.items.findIndex(contact => contact.id === action.payload);
-      state.contacts.splice(index, 1);
-    },
-  },
-});
+  
+};
+const handlePending = state => {
+  state.isLoading = true;
+};
 
-export const {addContact, removeContact} = contactsSlice.actions;
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
+
+export const contactsSlice = createSlice({
+  name: 'contacts',
+  initialState: contactsInitialState,
+  extraReducers: {
+    [fetchContacts.pending]: handlePending,
+    [fetchContacts.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items = action.payload;
+    },
+    [fetchContacts.rejected]: handleRejected,
+  },
+
+  [addContact.pending]: handlePending,
+  [addContact.fulfilled] (state, action) {
+    state.isLoading = false;
+    state.error = null;
+    state.items.push(action.payload);
+    toast.success(`Contacts ${action.payload} add`);
+  },
+  [addContact.rejected]: handleRejected,
+
+  [deleteContact.pending]: handlePending,
+  [deleteContact.fulfilled](state, action) {
+    state.isLoading = false;
+    state.error = null;
+    const index = state.items.findIndex(contact => contact.id === action.payload);
+      state.items.splice(index, 1);
+  },
+  [deleteContact.rejected]: handleRejected,
+});
