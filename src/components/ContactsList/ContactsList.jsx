@@ -2,24 +2,25 @@ import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import { Contacts } from './ContactsListStyled';
-import { removeContact } from '../../redux/contactsSlice'
-
+import { deleteContact } from '../../redux/operations'
+import { BsPhone, BsDot } from "react-icons/bs";
 const ContactsList = ({ contacts }) => {
    const dispatch = useDispatch();
-
+   console.log(contacts)
    return (  
       <Contacts>
-         {contacts.items.map(({ name, number, id }) => 
-            <li key={nanoid()}>
-               <p>- {name}: {number}</p>
-               <button type='button' onClick={()=> dispatch(removeContact(id))}>Delete</button>
+          {contacts.map(({ name, phone, id }) => ( 
+         <li key={nanoid()}>
+               <p><BsPhone/> {name}<BsDot/>{phone}</p>
+               <button type='button' onClick={()=> dispatch(deleteContact(id))}>Delete</button>
             </li>
+            )
             )
          }
       </Contacts>
    )
 }
-
+// onClick={()=> dispatch(removeContact(id))}
 // ContactsList.propTypes = {
 //    removeContact: PropTypes.func,
 //    contacts: PropTypes.arrayOf(PropTypes.shape({
