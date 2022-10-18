@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterName } from 'redux/filterSlice';
-import { getFilter, getContacts } from "redux/selectors";
+import { getFilter, getContacts, getIsLoading, getError } from "redux/selectors";
 import ContactsList from "components/ContactsList/ContactsList";
 import { Label } from "./FilterStyled";
+import Loader from 'components/Loader/Loader';
+
 
 const Filter = () => {
   const dispatch = useDispatch();
   const dataFilter = useSelector(getFilter);
   const dataContacts = useSelector(getContacts);
+  const isLoading = useSelector(getIsLoading);
+  const isError = useSelector(getError);
 
   const filterNamesContacts = e => {
     dispatch(filterName(e.target.value))
@@ -41,9 +45,12 @@ const Filter = () => {
           onChange={filterNamesContacts} />
         </Label>
 
-        <ContactsList 
-          contacts={getFilteredContacts()} 
-        />
+
+        {isLoading && !isError && <Loader/>}
+        
+        {dataContacts && <ContactsList 
+           contacts={getFilteredContacts()} 
+        /> }
       </>
   )
     }
