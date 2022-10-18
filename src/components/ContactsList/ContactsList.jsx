@@ -3,8 +3,8 @@ import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import { Contacts } from './ContactsListStyled';
 import { deleteContact } from '../../redux/operations'
-import { BsFillTrashFill, BsDot } from "react-icons/bs";
-import { FcCellPhone, FcMinus, FcEmptyTrash} from "react-icons/fc";
+import { BsFillTrashFill } from "react-icons/bs";
+import { FcCellPhone, FcMinus} from "react-icons/fc";
 const ContactsList = ({ contacts }) => {
    const dispatch = useDispatch();
    console.log(contacts)
