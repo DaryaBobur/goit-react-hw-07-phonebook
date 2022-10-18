@@ -8,7 +8,7 @@ const Loader = () => {
             visible={true} 
             height="100" 
             width="100"
-            color='gray'
+            color='#b3d0e9'
         />
         </LoaderStyled>
     )
