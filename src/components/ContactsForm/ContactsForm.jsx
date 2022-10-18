@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Form } from './ContactsFormStyled';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 
 const ContactForm = () =>  {
 
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const userInputId = nanoid();
 
@@ -23,7 +23,7 @@ const ContactForm = () =>  {
       break;
 
       case 'number':
-      setNumber(value);
+      setPhone(value);
       break;
 
       default:
@@ -34,13 +34,14 @@ const ContactForm = () =>  {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(addContact({name, number}));
+    dispatch(addContact({ name, phone }));
+    console.log({name, phone})
     resetForm();
   };
 
   const resetForm = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -63,7 +64,7 @@ const ContactForm = () =>  {
             type="tel"
             name="number"
             id={userInputId}
-            value={number}
+            value={phone}
             onChange={handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
