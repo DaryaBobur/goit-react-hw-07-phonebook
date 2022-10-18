@@ -5,7 +5,7 @@ import { Form } from './ContactsFormStyled';
 import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/operations';
 
-import { FcManager, FcPhone, FcPlus } from "react-icons/fc";
+import { FcManager, FcPhone } from "react-icons/fc";
 const ContactForm = () =>  {
 
   const dispatch = useDispatch();
