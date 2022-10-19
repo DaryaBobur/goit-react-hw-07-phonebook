@@ -1,24 +1,27 @@
+import { useDispatch  } from 'react-redux';
+import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import ContactForm from '../ContactsForm/ContactsForm';
 import Filter from '../Filter/Filter';
-import { Toaster } from 'react-hot-toast';
-import { ContainerApp, Title, Subtitle } from './AppStyled';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
+import { ContainerApp, Title, Subtitle } from './AppStyled';
+import { FcPhoneAndroid } from "react-icons/fc";
 
-import { FcTwoSmartphones } from "react-icons/fc";
 const App = () => {
   const dispatch = useDispatch();
 
-const data = useSelector(state=>state.contacts.items) 
-console.log(data)
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
     <ContainerApp>
-      <Title><FcTwoSmartphones/>Phonebook</Title>
+
+      <Title>
+        <FcPhoneAndroid/>
+        Phonebook
+      </Title>
+
       <ContactForm />
 
       <Subtitle>Contacts</Subtitle>
@@ -26,9 +29,9 @@ console.log(data)
       <Filter />
 
       <Toaster
-  position="top-right"
-  reverseOrder={false}
-/>
+        position="top-right"
+        reverseOrder={false}
+      />
 
     </ContainerApp>
   )
