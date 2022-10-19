@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { Form } from './ContactsFormStyled';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/operations';
+import { addContact} from 'redux/operations';
+import { BsPersonPlusFill, BsPhone } from "react-icons/bs";
 
-import { FcManager, FcPhone } from "react-icons/fc";
 const ContactForm = () =>  {
 
   const dispatch = useDispatch();
@@ -36,7 +36,6 @@ const ContactForm = () =>  {
     e.preventDefault();
 
     dispatch(addContact({ name, phone }));
-    console.log({name, phone})
     resetForm();
   };
 
@@ -47,7 +46,7 @@ const ContactForm = () =>  {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <label htmlFor='htmlFor={userInputId}'><FcManager/>Name
+      <label htmlFor='htmlFor={userInputId}'><BsPersonPlusFill/>Name
         <input 
             type="text"
             name="name"
@@ -60,7 +59,7 @@ const ContactForm = () =>  {
         /> 
       </label>
 
-      <label htmlFor="{userInputId}"><FcPhone/>Number
+      <label htmlFor="{userInputId}"><BsPhone/>Number
         <input
             type="tel"
             name="number"
