@@ -6,8 +6,8 @@ const Loader = () => {
         <LoaderStyled>
         <ThreeCircles  
             visible={true} 
-            height="100" 
-            width="100"
+            height="50" 
+            width="50"
             color='#b3d0e9'
         />
         </LoaderStyled>
