@@ -35,26 +35,21 @@ const Filter = () => {
     
   };
 
-    return (
-      <>
-        <Label>
-          Find contacts by name
-          <input type="text" 
-          value={dataFilter} 
-          name="filter" 
-          onChange={filterNamesContacts} />
-        </Label>
+  return (
+    <>
+      <Label>
+        Find contacts by name
+        <input type="text" 
+        value={dataFilter} 
+        name="filter" 
+        onChange={filterNamesContacts} />
+      </Label>
 
-
-        {isLoading && !isError && <Loader/>}
-        
-        {dataContacts && <ContactsList 
-           contacts={getFilteredContacts()} 
-        /> }
-      </>
+      {dataContacts && <ContactsList contacts={getFilteredContacts()} />}
+      {isLoading && !isError && <Loader/>}
+    </>
   )
-    }
-
+}
 
 Filter.propTypes = {
   onChange: PropTypes.func,
